@@ -1,0 +1,9 @@
+export const shopActionTypes = {
+  //when we handled asynchronous firebase in our ComponentDidMount
+  // UPDATE_COLLECTIONS: "UPDATE_COLLECTIONS",
+
+  //Redux-Thunk
+  FETCH_COLLECTIONS_START: "FETCH_COLLECTIONS_START",
+  FETCH_COLLECTIONS_SUCCESS: "FETCH_COLLECTIONS_SUCCESS",
+  FETCH_COLLECTIONS_FAILURE: "FETCH_COLLECTIONS_FAILURE",
+};

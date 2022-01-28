@@ -1,0 +1,24 @@
+body {
+  font-family: "Open Sans Condensed";
+  padding: 20px 40px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(rgba(68, 68, 68, 0.438), #000);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(rgba(167, 167, 167, 0.212), rgb(56, 56, 56));
+}
