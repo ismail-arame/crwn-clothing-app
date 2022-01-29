@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 
 import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
@@ -11,33 +11,30 @@ import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 
 //we're going to tell our Route that the RouteName is going to be a parameter =>  shop/:category
 //so we want to access the string in our URL to know which category to fetch
-class ShopPage extends React.Component {
-  componentDidMount() {
-    const { fetchCollectionsStart } = this.props;
+const ShopPage = ({ fetchCollectionsStart, match }) => {
+  //useEffect as ComponentDidMount (if we pass empty array we will get a warning missing dependncy fetchCollectionsStart)
+
+  useEffect(() => {
     fetchCollectionsStart();
-  }
+  }, [fetchCollectionsStart]);
 
   //we dont wanna hardcode /shop to make it more flexible if we want to reuse it in another place this is why we used  path={`${match.path}`}
   //what this does is it allows us to access this categoryId as a Parameter on the match Object
-  render() {
-    const { match } = this.props;
-
-    //if we use render instead component property we have to make sure to pass props (match, history, location) down into our component (Obligation)
-    return (
-      <div className="shop-page">
-        <Route
-          exact
-          path={`${match.path}`}
-          component={CollectionsOverviewContainer}
-        />
-        <Route
-          path={`${match.path}/:collectionId`}
-          component={CollectionPageContainer}
-        />
-      </div>
-    );
-  }
-}
+  //if we use render instead component property we have to make sure to pass props (match, history, location) down into our component (Obligation)
+  return (
+    <div className="shop-page">
+      <Route
+        exact
+        path={`${match.path}`}
+        component={CollectionsOverviewContainer}
+      />
+      <Route
+        path={`${match.path}/:collectionId`}
+        component={CollectionPageContainer}
+      />
+    </div>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
