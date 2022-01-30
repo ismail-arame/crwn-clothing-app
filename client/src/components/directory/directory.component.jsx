@@ -1,27 +1,27 @@
 import React from "react";
 import "./directory.styles.scss";
 import MenuItem from "../menu-item/menu-item.component";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+// import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectDirectorySections } from "../../redux/directory/directory.selectors";
 
 //we will use a class component because we need to store the state of those menu-items that we wanna pass and create our menu-items with
 
 //we do not need a constructor because we moved our state to directoryReducer
 // const { sections } = this.props;
-const Directory = ({ sections }) => (
-  <div className="directory-menu">
-    {sections.map(({ id, ...otherSectionProps }) => {
-      return <MenuItem key={id} {...otherSectionProps}></MenuItem>;
-    })}
-  </div>
-);
+const Directory = () => {
+  const sections = useSelector(selectDirectorySections);
 
-const mapStateToProps = createStructuredSelector({
-  sections: selectDirectorySections,
-});
+  return (
+    <div className="directory-menu">
+      {sections.map(({ id, ...otherSectionProps }) => {
+        return <MenuItem key={id} {...otherSectionProps}></MenuItem>;
+      })}
+    </div>
+  );
+};
 
-export default connect(mapStateToProps)(Directory);
+export default Directory;
 
 //we used an ES6 trick (...spreading)
 

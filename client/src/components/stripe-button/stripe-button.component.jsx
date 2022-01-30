@@ -1,6 +1,7 @@
 //To install   =>   npm install react-stripe-checkout
 
 import React from "react";
+import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 
 const StripeCheckoutButton = ({ price }) => {
@@ -14,8 +15,25 @@ const StripeCheckoutButton = ({ price }) => {
   //submission is going to be handled by StripeCheckout component
   //if you wanna process payments you will pass the token to your backend which then creates the charge
   const onToken = (token) => {
-    console.log(token);
-    alert("Payement Successful");
+    // console.log(token);
+    //returns a promise
+    axios({
+      url: "payment",
+      method: "post",
+      data: {
+        amount: priceForStripe,
+        token,
+      },
+    })
+      .then((response) => {
+        alert("Payement Successful");
+      })
+      .catch((error) => {
+        console.log("Payement error: ", JSON.parse(error));
+        alert(
+          "there was an issue with your payment, please make sure you use the provided credit card."
+        );
+      });
   };
 
   //this component have multiple properties that enable or disable diffrent features that we have access to inside our checkourt dropdown
