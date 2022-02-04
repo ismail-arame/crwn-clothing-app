@@ -22,3 +22,9 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(rgba(167, 167, 167, 0.212), rgb(56, 56, 56));
 }
+
+@media screen and (max-width: 800px) {
+  body {
+    padding: 10px;
+  }
+}

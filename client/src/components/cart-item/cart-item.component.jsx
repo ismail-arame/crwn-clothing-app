@@ -15,4 +15,5 @@ const CartItem = ({ item: { name, price, imageUrl, quantity } }) => {
   );
 };
 
-export default CartItem;
+//because everyTime we add To cart we loop the cartItems from start to end so we waste renders and the solution is to memoize the CartItem Functional Component to save us renders
+export default React.memo(CartItem);

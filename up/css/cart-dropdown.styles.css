@@ -1,0 +1,60 @@
+.cart-dropdown {
+  position: absolute;
+  width: 240px;
+  height: 346px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 20px;
+  border: 1px solid black;
+  background-color: white;
+  top: 90px;
+  right: 40px;
+  z-index: 5;
+}
+
+.cart-dropdown:hover .cart-items::-webkit-scrollbar-thumb {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(68, 68, 68, 0.438)), to(#000));
+  background: linear-gradient(rgba(68, 68, 68, 0.438), #000);
+  border-radius: 10px;
+}
+
+.cart-dropdown:hover .cart-items::-webkit-scrollbar-thumb:hover {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(167, 167, 167, 0.212)), to(#383838));
+  background: linear-gradient(rgba(167, 167, 167, 0.212), #383838);
+}
+
+.cart-dropdown .cart-items {
+  height: 240px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-y: scroll;
+}
+
+.cart-dropdown .cart-items::-webkit-scrollbar {
+  width: 6.8px;
+}
+
+.cart-dropdown .cart-items::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.cart-dropdown .empty-message {
+  font-size: 19px;
+  font-weight: bolder;
+  margin: 50px auto;
+}
+
+.cart-dropdown button {
+  margin-top: auto;
+}
+/*# sourceMappingURL=cart-dropdown.styles.css.map */

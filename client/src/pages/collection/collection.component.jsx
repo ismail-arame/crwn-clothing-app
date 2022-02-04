@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCollection } from "../../redux/shop/shop.selectors";
 
+import memoize from "lodash.memoize";
+
 //we have CollectionPage is nested inside a Route (ShopPage) so match and history and location are pased to it as Props
 const CollectionPage = ({ match }) => {
   // we have access to categoryId on our params Property
@@ -16,8 +18,12 @@ const CollectionPage = ({ match }) => {
   const params = useParams();
   console.log(params.collectionId);
 
+  //memoizing
+  //Memoize does the same idea of memoization as reselect does for our selectors, except this time we're memoizing the return of our function which returns our selector:
+  const memoizedSelectCollection = memoize(selectCollection);
+
   // const collection = useSelector(selectCollection(match.params.collectionId));
-  const collection = useSelector(selectCollection(params.collectionId));
+  const collection = useSelector(memoizedSelectCollection(params.collectionId));
   const { title, items } = collection;
   return (
     <div className="collection-page">

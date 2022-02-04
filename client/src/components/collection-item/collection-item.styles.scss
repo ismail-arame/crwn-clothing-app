@@ -23,6 +23,15 @@
     width: 80%;
     opacity: 0.7;
     display: none;
+
+    @media (max-width: 800px) {
+      display: block;
+      opacity: 0.8;
+    }
+    @media (max-width: 600px) {
+      min-width: unset;
+      padding: 0 10px;
+    }
   }
 
   &:hover {
@@ -31,6 +40,19 @@
     }
     .custom-button {
       display: flex;
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 40vw;
+
+    &hover {
+      .image {
+        opacity: unset;
+      }
+      .custom-button {
+        opacity: unset;
+      }
     }
   }
 

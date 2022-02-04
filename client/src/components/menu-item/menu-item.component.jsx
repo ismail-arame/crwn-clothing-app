@@ -4,6 +4,7 @@ import "./menu-item.styles.scss";
 
 const MenuItem = ({ title, imageUrl, linkUrl, size, history, match }) => {
   // console.log(`${match.url}${linkUrl}`); // /hats
+  //size: "large" is the className to be applied if size is true
   return (
     <div
       className={`${size ? size : ""} menu-item`}

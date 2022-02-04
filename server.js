@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 //and it let us build pathing to directories
 // const cors = require("cors");
 const path = require("path");
+//compression and gziping all our files and chunks for better performance
+const compression = require("compression");
 
 //this is how we keep the secret stripe key secret
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
@@ -17,6 +19,8 @@ const app = express();
 //if there is a PORT in the process environement we'll use that port else PORT=5000
 //when you deploy to heroku it sets the port for us
 const port = process.env.PORT || 5000;
+
+app.use(compression());
 
 //if we want our frontEnd to access our web server so we'll go to package.json of the client and tell it to use the port 5000 whenever we make an API request
 //add "proxy": "http://localhost:5000"

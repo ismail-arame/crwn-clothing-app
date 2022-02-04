@@ -1,11 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
 
-import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
-import CollectionPageContainer from "../collection/collection.container";
+import { useSelector } from "react-redux";
+import { selectCollections } from "../../redux/shop/shop.selectors";
 
 import { connect } from "react-redux";
 import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
+
+import Spinner from "../../components/spinner/spinner.component";
+import ErrorBoundary from "../../components/error-boundary/error-boundary.component";
+
+//Code Splitting
+const CollectionsOverviewContainer = lazy(() =>
+  import("../../components/collections-overview/collections-overview.container")
+);
+const CollectionPageContainer = lazy(() =>
+  import("../collection/collection.container")
+);
 
 //we have ShopPage is nested inside a Route (App) so match and history and location are passed to it as Props
 
@@ -13,9 +24,10 @@ import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 //so we want to access the string in our URL to know which category to fetch
 const ShopPage = ({ fetchCollectionsStart, match }) => {
   //useEffect as ComponentDidMount (if we pass empty array we will get a warning missing dependncy fetchCollectionsStart)
+  const collections = useSelector(selectCollections);
 
   useEffect(() => {
-    fetchCollectionsStart();
+    if (!collections) fetchCollectionsStart();
   }, [fetchCollectionsStart]);
 
   //we dont wanna hardcode /shop to make it more flexible if we want to reuse it in another place this is why we used  path={`${match.path}`}
@@ -23,15 +35,19 @@ const ShopPage = ({ fetchCollectionsStart, match }) => {
   //if we use render instead component property we have to make sure to pass props (match, history, location) down into our component (Obligation)
   return (
     <div className="shop-page">
-      <Route
-        exact
-        path={`${match.path}`}
-        component={CollectionsOverviewContainer}
-      />
-      <Route
-        path={`${match.path}/:collectionId`}
-        component={CollectionPageContainer}
-      />
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner />}>
+          <Route
+            exact
+            path={`${match.path}`}
+            component={CollectionsOverviewContainer}
+          />
+          <Route
+            path={`${match.path}/:collectionId`}
+            component={CollectionPageContainer}
+          />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

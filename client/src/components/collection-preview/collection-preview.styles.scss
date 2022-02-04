@@ -3,6 +3,10 @@
   flex-direction: column;
   margin-bottom: 30px;
 
+  @media (max-width: 800px) {
+    align-items: center;
+  }
+
   .title {
     font-size: 29.5px;
     margin-bottom: 25px;
@@ -17,5 +21,11 @@
   .preview {
     display: flex;
     justify-content: space-between;
+    @media (max-width: 800px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 15px;
+      row-gap: 25px;
+    }
   }
 }

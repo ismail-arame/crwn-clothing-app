@@ -1,7 +1,5 @@
 import { createSelector } from "reselect";
 
-import memoize from "lodash.memoize";
-
 const selectShop = (state) => state.shop;
 
 export const selectCollections = createSelector(
@@ -33,13 +31,10 @@ export const selectCollectionsForPreview = createSelector(
 //curriedMultiply = (a) => (b) => a*b
 //curriedMultiply(5)(3); => 5*3 = 15
 
-//Memoize does the same idea of memoization as reselect does for our selectors, except this time we're memoizing the return of our function which returns our selector:
-
-export const selectCollection = memoize((collectionUrlParam) =>
+export const selectCollection = (collectionUrlParam) =>
   createSelector([selectCollections], (collections) =>
     collections ? collections[collectionUrlParam] : null
-  )
-);
+  );
 
 //the concept of storing lists of elements inside of an object instead of an array
 

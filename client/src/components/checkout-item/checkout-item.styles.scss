@@ -7,6 +7,10 @@
   font-size: 20px;
   align-items: center;
 
+  @media (max-width: 600px) {
+    font-size: 17px;
+  }
+
   .image-container {
     width: 23%;
     padding-right: 15px;
